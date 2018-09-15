@@ -1,6 +1,6 @@
 <div class="collapse navbar-collapse navbar-right" id="navbar-collapsible-content">
     <ul class="nav navbar-nav">
-        <% if user_signed_in %>
+        <% if user_signed_in? %>
             <li class="dropdown pc-menu">
                 <a id="user-settings" class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <span id="user-name"><%= current_user.name %></span>
