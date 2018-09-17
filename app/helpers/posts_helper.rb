@@ -1,6 +1,5 @@
 module PostsHelper
     def create_new_post_partial_path
-        puts "HERERERERERERERERERERERE!!!!!!!"
         if user_signed_in?
             'posts/branch/create_new_post/signed_in'
         else
