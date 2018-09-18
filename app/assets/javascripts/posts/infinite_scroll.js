@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function (){
+$(document).ready(function (){
     var isLoading = false;
     if($('.infinite-scroll', this).size() > 0){
         $(window).on('scroll', function(){

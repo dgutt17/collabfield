@@ -84,8 +84,9 @@ RSpec.describe PostsHelper, type: :helper do
     end
 
     it "returns a remove_pagination partial's path" do
+      posts = double('posts', :next_page => nil)
       assign(:posts, posts)
-      expect(helper.update_pagintation_partial_path).to(
+      expect(helper.update_pagination_partial_path).to(
         eq 'posts/posts_pagination_page/remove_pagination'
       )
     end
