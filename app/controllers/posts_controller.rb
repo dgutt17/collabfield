@@ -1,10 +1,26 @@
 class PostsController < ApplicationController
+    before_action :redirect_if_not_signed_in, only: [:new]
 
     def index
     end
 
     def show
         @post = Post.find(params[:id])
+    end
+
+    def new 
+        @branch = params[:branch]
+        @categories = Category.where(branch: @branch)
+        @post = Post.new
+    end
+
+    def create
+        @post = Post.new(permit_params)
+        if @post.save
+            redirect_to post_path(@post)
+        else
+            redirect_to root_path
+        end
     end
 
     def hobby
@@ -35,5 +51,11 @@ class PostsController < ApplicationController
             category: params[:category],
             branch: params[:branch]
         }).call()
+    end
+
+    private 
+
+    def permit_params
+        params.require(:post).permit(:title, :content, :category_id).merge(user_id: current_user.id)
     end
 end
