@@ -13,6 +13,15 @@ Rails.application.routes.draw do
       get 'team'
     end
   end
+
+  namespace :private do
+    resources :conversations, only: [:create] do
+      member do
+        post :close
+      end
+    end
+    resources :messages, only: [:index, :create]
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :pages
   root to: "pages#index"

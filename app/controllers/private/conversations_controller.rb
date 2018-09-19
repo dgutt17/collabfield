@@ -7,11 +7,11 @@ class Private::ConversationsController < ApplicationController
             Private::Message.create(user_id: recipient_id, conversation_id: conversation.id, body: params[:message_body])
 
             respond_to do |format|
-                format.js {render partial: 'posts/show/contact_user/message_form/success'}
+                format.js {render :partial => 'posts/show/contact_user/message_form/success'}
             end
         else
             respond_to do |format|
-                format.js {render partial: 'posts/show/contact_user/message_form/fail'}
+                format.js {render :partial => 'posts/show/contact_user/message_form/fail'}
             end
         end
     end
