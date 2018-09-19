@@ -15,8 +15,12 @@
 
   <div class="row">
     <div class="col-sm-12" id="feed">
-      <%= render @posts %>
-      <%= render no_posts_partial_path(@posts) %>		
+      <% if @posts.length > 0 %>
+        <%= render @posts %>
+      <% else %>
+        <% puts "@posts!!!!!!!: #{@posts.to_json}"%>
+        <%= render no_posts_partial_path(@posts) %>
+      <% end %>	
     </div>
   </div><!-- row -->	
 
