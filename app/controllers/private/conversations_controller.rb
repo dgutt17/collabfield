@@ -1,12 +1,14 @@
 class Private::ConversationsController < ApplicationController
+
     def create 
         recipient_id = Post.find(params[:post_id]).user.id
         conversation = Private::Conversation.new(sender_id: current_user.id, recipient_id: recipient_id)
 
         if conversation.save
             Private::Message.create(user_id: recipient_id, conversation_id: conversation.id, body: params[:message_body])
-            add_to_conversation unless already_added?
-
+            @conversation = Private::Conversation.find(conversation.id)
+            add_to_conversation()
+            
             respond_to do |format|
                 format.js {render :partial => 'posts/show/contact_user/message_form/success'}
             end
@@ -25,7 +27,7 @@ class Private::ConversationsController < ApplicationController
     private
 
     def add_to_conversation
-        session[:private_conversations] || = []
+        session[:private_conversations] ||= []
         session[:private_conversations] << @conversation.id
     end
 end
